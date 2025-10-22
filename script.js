@@ -84,16 +84,36 @@ document.addEventListener('DOMContentLoaded', function() {
         moveButtonRandomly(this);
     });
     
-    // Effet de fuite du bouton "No" au toucher (mobile)
+    // Effet de fuite du bouton "No" au toucher (mobile) - CONTINU
+    let isMoving = false;
+    
     btnNo.addEventListener('touchstart', function(e) {
         e.preventDefault();
+        isMoving = true;
         moveButtonRandomly(this);
+        
+        // Continuer à bouger tant que le doigt est posé
+        const keepMoving = () => {
+            if (isMoving) {
+                moveButtonRandomly(this);
+                setTimeout(keepMoving, 200); // Bouge toutes les 200ms
+            }
+        };
+        keepMoving();
+    });
+    
+    // Arrêter le mouvement quand le doigt se lève
+    btnNo.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        isMoving = false;
     });
     
     // Effet de fuite du bouton "No" au mouvement du doigt (mobile)
     btnNo.addEventListener('touchmove', function(e) {
         e.preventDefault();
-        moveButtonRandomly(this);
+        if (isMoving) {
+            moveButtonRandomly(this);
+        }
     });
     
     // Effet pour le bouton "No" au clic
