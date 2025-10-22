@@ -9,6 +9,7 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     font-family: 'Arial', sans-serif;
+    padding: 10px;
 }
 
 /* Animation de cœurs flottants */
@@ -64,9 +65,16 @@ body {
 .background {
     display: flex;
     justify-content: center; 
-    margin-top: 8rem;
+    margin-top: 2rem;
     position: relative;
     z-index: 10;
+    padding: 0 10px;
+}
+
+@media (min-width: 768px) {
+    .background {
+        margin-top: 8rem;
+    }
 }
 
 .container {
@@ -74,12 +82,21 @@ body {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    padding: 30px;
+    padding: 20px;
     box-shadow: 0 8px 32px rgba(255, 105, 180, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.2);
     animation: pulse 2s ease-in-out infinite;
     position: relative;
     overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 30px;
+    }
 }
 
 @keyframes pulse {
@@ -92,10 +109,18 @@ body {
 }
 
 .container-image img {
-    height: 22rem;
+    height: 15rem;
+    width: 100%;
+    object-fit: cover;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
     transition: transform 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .container-image img {
+        height: 22rem;
+    }
 }
 
 .container-image img:hover {
@@ -104,12 +129,19 @@ body {
 
 .container p {
     margin-top: 15px;
-    font-size: 45px;
+    font-size: 28px;
     font-weight: bold;
     text-align: center;
     color: #fff;
     text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.5);
     animation: glow 2s ease-in-out infinite alternate;
+    line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+    .container p {
+        font-size: 45px;
+    }
 }
 
 @keyframes glow {
@@ -119,11 +151,11 @@ body {
 
 .btn-yes, .btn-no {
     display: inline-block;
-    padding: 15px 30px;
-    margin: 15px;
+    padding: 12px 24px;
+    margin: 10px;
     border: none;
     border-radius: 50px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -131,6 +163,16 @@ body {
     color: white;
     position: relative;
     overflow: hidden;
+    min-width: 80px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .btn-yes, .btn-no {
+        padding: 15px 30px;
+        margin: 15px;
+        font-size: 18px;
+    }
 }
 
 .btn-yes {

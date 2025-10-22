@@ -54,15 +54,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
     });
     
-    // Effet de fuite du bouton "No" au survol
+    // Effet de fuite du bouton "No" au survol (adapté pour mobile)
     btnNo.addEventListener('mouseenter', function() {
         const container = document.querySelector('.container');
         const containerRect = container.getBoundingClientRect();
         const btnRect = this.getBoundingClientRect();
         
         // Calculer les positions possibles dans le conteneur
-        const maxX = containerRect.width - btnRect.width;
-        const maxY = containerRect.height - btnRect.height;
+        const maxX = Math.max(0, containerRect.width - btnRect.width);
+        const maxY = Math.max(0, containerRect.height - btnRect.height);
         
         // Position aléatoire dans le conteneur
         const randomX = Math.random() * maxX;
@@ -74,8 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
         this.style.top = randomY + 'px';
         this.style.transition = 'all 0.5s ease';
         
-        // Effet de rotation pour plus de fun
-        this.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+        // Effet de rotation pour plus de fun (moins prononcé sur mobile)
+        const rotation = window.innerWidth <= 768 ? Math.random() * 180 : Math.random() * 360;
+        this.style.transform = 'rotate(' + rotation + 'deg)';
     });
     
     // Effet pour le bouton "No" au clic
@@ -104,8 +105,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 2000);
 });
 
-// Effet de parallaxe sur l'image
+// Effet de parallaxe sur l'image (désactivé sur mobile)
 document.addEventListener('mousemove', function(e) {
+    // Vérifier si on est sur mobile
+    if (window.innerWidth <= 768) return;
+    
     const img = document.querySelector('.container-image img');
     if (img) {
         const x = (e.clientX / window.innerWidth) * 20 - 10;
