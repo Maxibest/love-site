@@ -54,11 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
     });
     
-    // Effet de fuite du bouton "No" au survol (adapté pour mobile)
-    btnNo.addEventListener('mouseenter', function() {
+    // Fonction pour déplacer le bouton aléatoirement
+    function moveButtonRandomly(button) {
         const container = document.querySelector('.container');
         const containerRect = container.getBoundingClientRect();
-        const btnRect = this.getBoundingClientRect();
+        const btnRect = button.getBoundingClientRect();
         
         // Calculer les positions possibles dans le conteneur
         const maxX = Math.max(0, containerRect.width - btnRect.width);
@@ -69,14 +69,31 @@ document.addEventListener('DOMContentLoaded', function() {
         const randomY = Math.random() * maxY;
         
         // Animation fluide vers la nouvelle position
-        this.style.position = 'absolute';
-        this.style.left = randomX + 'px';
-        this.style.top = randomY + 'px';
-        this.style.transition = 'all 0.5s ease';
+        button.style.position = 'absolute';
+        button.style.left = randomX + 'px';
+        button.style.top = randomY + 'px';
+        button.style.transition = 'all 0.3s ease';
         
-        // Effet de rotation pour plus de fun (moins prononcé sur mobile)
-        const rotation = window.innerWidth <= 768 ? Math.random() * 180 : Math.random() * 360;
-        this.style.transform = 'rotate(' + rotation + 'deg)';
+        // Effet de rotation pour plus de fun
+        const rotation = Math.random() * 360;
+        button.style.transform = 'rotate(' + rotation + 'deg)';
+    }
+
+    // Effet de fuite du bouton "No" au survol (desktop)
+    btnNo.addEventListener('mouseenter', function() {
+        moveButtonRandomly(this);
+    });
+    
+    // Effet de fuite du bouton "No" au toucher (mobile)
+    btnNo.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        moveButtonRandomly(this);
+    });
+    
+    // Effet de fuite du bouton "No" au mouvement du doigt (mobile)
+    btnNo.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        moveButtonRandomly(this);
     });
     
     // Effet pour le bouton "No" au clic
